@@ -8,23 +8,22 @@ def earliest_ancestor(ancestors, starting_node):
     for i in ancestors:
         graph.add_edge(i[0],i[1])
         # graph.add_edge(i[1],i[0])
-    shortest=[None]*len(ancestors)
-    node=starting_node
+    longest=[None]
+    node=-1
     for i in graph.vertices:
-        print("hi",i)
+        print("hi",i,graph.dfs(i,starting_node))
         if i!=starting_node and graph.bfs(i,starting_node):
             print("INSIDE",i)
-            if len(graph.bfs(i,starting_node)) == len(shortest):
+            if len(graph.bfs(i,starting_node)) == len(longest):
                 if i < node:
-                    shortest=graph.bfs(i,starting_node)
-                    starting_node=i
-            if len(graph.bfs(i,starting_node)) < len(shortest):
-                shortest=graph.bfs(i,starting_node)
-                starting_node=i
+                    longest=graph.bfs(i,starting_node)
+                    node=i
+            if len(graph.bfs(i,starting_node)) > len(longest):
+                longest=graph.bfs(i,starting_node)
+                node=i
         print("Wow", i,starting_node)
-    if node==starting_node:
-        starting_node=-1
-    return starting_node
+
+    return node
 
         
     # print("WOOOOW",shortest)
