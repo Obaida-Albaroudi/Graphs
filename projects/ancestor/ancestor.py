@@ -11,7 +11,7 @@ def earliest_ancestor(ancestors, starting_node):
     longest=[None]
     node=-1
     for i in graph.vertices:
-        print("hi",i,graph.dfs(i,starting_node))
+        print("hi",i,graph.bfs(i,starting_node))
         if i!=starting_node and graph.bfs(i,starting_node):
             print("INSIDE",i)
             if len(graph.bfs(i,starting_node)) == len(longest):
