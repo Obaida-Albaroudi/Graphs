@@ -1,6 +1,6 @@
 # Graphs
 
-## Objectives
+## Objectives 
 
 * [Graph Intro](objectives/graph-intro)
 * [Graph Representations](objectives/graph-representations)
@@ -12,6 +12,7 @@
 ## Projects
 
 ### Day 1
+#Got it
 * [Graph Traversal and Search](projects/graph)
 
 ### Day 2
