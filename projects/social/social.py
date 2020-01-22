@@ -1,5 +1,7 @@
 import random
 from graph import Graph
+from util import Stack, Queue  # These may come in handy
+
 
 class User:
     def __init__(self, name):
@@ -47,7 +49,7 @@ class SocialGraph:
         self.friendships = {}
         # !!!! IMPLEMENT ME
         # Add users
-
+        numberOfUsers=num_users
         while num_users:
             self.add_user(num_users)
             num_users-=1
@@ -64,7 +66,28 @@ class SocialGraph:
                 if (sum(DistributionOfFriendships)+randomNum)/(len(DistributionOfFriendships)+1) == avg_friendships:
                     DistributionOfFriendships.append(randomNum)
         # Create friendships
-
+        arr=[1,2,3,4,5,6,7,8,9,10]
+        for i in self.users:
+            count=len(self.friendships[i])
+            # print("HELLLO",i,self.friendships[i])
+            # print("COUNT", count, self.friendships[i], len(self.friendships[i]),i)     
+            if DistributionOfFriendships[i-1]>0:                
+                if count <DistributionOfFriendships[i-1]:
+                    while count!=DistributionOfFriendships[i-1]:
+                        randomNum=random.randrange(1,numberOfUsers+1)
+                        # print(randomNum, len(self.friendships[randomNum]), DistributionOfFriendships[randomNum-1])
+                        if len(self.friendships[randomNum])<DistributionOfFriendships[randomNum-1] and randomNum!=i:
+                            # print("randomNum",randomNum ,"i",i,"friendships",self.friendships[i], "count", count,DistributionOfFriendships[i-1], self.friendships)
+                            if randomNum not in self.friendships[i]:
+                                count+=1
+                                # print("III",i,"Distribution",DistributionOfFriendships[i-1],"randomNum",randomNum,"count",count)
+                                self.add_friendship(i,randomNum)
+                                # print("after")
+  
+  
+                
+        print(random.randrange(numberOfUsers+1))
+        print(DistributionOfFriendships,DistributionOfFriendships[1])
 
     def get_all_social_paths(self, user_id):
         """
@@ -77,6 +100,27 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
+        graphs=Graph()
+        for i in self.users:
+            graphs.add_vertex(i)
+        
+        for i in self.users:
+            for x in self.friendships[i]:
+                graphs.add_edge(i,x)
+
+        print("WOOOW",graphs.vertices)
+        for i in graphs.vertices:
+            print(i)
+            if graphs.bfs(i,user_id):
+                visited[i]=graphs.bfs(i,user_id)
+                # if len(graph.bfs(i,user_id)) == len(longest):
+                #     if i < node:
+                #         longest=graph.bfs(i,user_id)
+                #         node=i
+                # if len(graph.bfs(i,user_id)) < len(longest):
+                #     longest=graph.bfs(i,user_id)
+                #     node=i
+        print("Wow", visited)
         return visited
 
 
