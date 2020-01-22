@@ -1,3 +1,6 @@
+import random
+from graph import Graph
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -46,7 +49,23 @@ class SocialGraph:
         while num_users:
             self.add_user(num_users)
             num_users-=1
-        print(self.users)
+        
+        DistributionOfFriendships=[]
+
+        while len(DistributionOfFriendships)<len(self.users)-1:
+            if DistributionOfFriendships!=True:
+                DistributionOfFriendships.append(random.randrange(0,5))
+            if sum(DistributionOfFriendships)/len(DistributionOfFriendships)==avg_friendships:
+                DistributionOfFriendships.append(random.randrange(0,5))
+            print("After two if", DistributionOfFriendships)
+            while sum(DistributionOfFriendships)/len(DistributionOfFriendships)!=avg_friendships:
+                randomNum=random.randrange(0,5)
+                print("randomNum",randomNum, "Average",(sum(DistributionOfFriendships)+randomNum)/(len(DistributionOfFriendships)+1))
+                if (sum(DistributionOfFriendships)+randomNum)/(len(DistributionOfFriendships)+1) == avg_friendships:
+                    print("inside", randomNum)
+                    DistributionOfFriendships.append(randomNum)
+            print("After While", DistributionOfFriendships)
+        print(len(self.users), "SUM OF ARR", sum(DistributionOfFriendships)/len(DistributionOfFriendships), DistributionOfFriendships, len(DistributionOfFriendships))
 
         # Add users
 
