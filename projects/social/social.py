@@ -43,6 +43,10 @@ class SocialGraph:
         self.users = {}
         self.friendships = {}
         # !!!! IMPLEMENT ME
+        while num_users:
+            self.add_user(num_users)
+            num_users-=1
+        print(self.users)
 
         # Add users
 
