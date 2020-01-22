@@ -66,16 +66,17 @@ class SocialGraph:
                 if (sum(DistributionOfFriendships)+randomNum)/(len(DistributionOfFriendships)+1) == avg_friendships:
                     DistributionOfFriendships.append(randomNum)
         # Create friendships
-        arr=[1,2,3,4,5,6,7,8,9,10]
+
+        print(DistributionOfFriendships)
         for i in self.users:
             count=len(self.friendships[i])
-            # print("HELLLO",i,self.friendships[i])
+            print("HELLLO",i,self.friendships[i])
             # print("COUNT", count, self.friendships[i], len(self.friendships[i]),i)     
             if DistributionOfFriendships[i-1]>0:                
                 if count <DistributionOfFriendships[i-1]:
                     while count!=DistributionOfFriendships[i-1]:
                         randomNum=random.randrange(1,numberOfUsers+1)
-                        # print(randomNum, len(self.friendships[randomNum]), DistributionOfFriendships[randomNum-1])
+                        print(DistributionOfFriendships,randomNum, i,len(self.friendships[randomNum]), DistributionOfFriendships[randomNum-1],self.friendships)
                         if len(self.friendships[randomNum])<DistributionOfFriendships[randomNum-1] and randomNum!=i:
                             # print("randomNum",randomNum ,"i",i,"friendships",self.friendships[i], "count", count,DistributionOfFriendships[i-1], self.friendships)
                             if randomNum not in self.friendships[i]:
@@ -108,18 +109,10 @@ class SocialGraph:
             for x in self.friendships[i]:
                 graphs.add_edge(i,x)
 
-        print("WOOOW",graphs.vertices)
         for i in graphs.vertices:
             print(i)
             if graphs.bfs(i,user_id):
                 visited[i]=graphs.bfs(i,user_id)
-                # if len(graph.bfs(i,user_id)) == len(longest):
-                #     if i < node:
-                #         longest=graph.bfs(i,user_id)
-                #         node=i
-                # if len(graph.bfs(i,user_id)) < len(longest):
-                #     longest=graph.bfs(i,user_id)
-                #     node=i
         print("Wow", visited)
         return visited
 
