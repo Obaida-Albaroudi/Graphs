@@ -49,46 +49,55 @@ class SocialGraph:
         self.friendships = {}
         # !!!! IMPLEMENT ME
         # Add users
-        numberOfUsers=num_users
-        while num_users:
-            self.add_user(num_users)
-            num_users-=1
+        # numberOfUsers=num_users
+        # while num_users:
+        #     self.add_user(num_users)
+        #     num_users-=1
         
-        DistributionOfFriendships=[]
+        # DistributionOfFriendships=[]
 
-        while len(DistributionOfFriendships)<len(self.users):
-            if DistributionOfFriendships!=True:
-                DistributionOfFriendships.append(random.randrange(0,5))
-            if len(DistributionOfFriendships)==len(self.users):
-                break
-            while sum(DistributionOfFriendships)/len(DistributionOfFriendships)!=avg_friendships:
-                randomNum=random.randrange(0,5)
-                if (sum(DistributionOfFriendships)+randomNum)/(len(DistributionOfFriendships)+1) == avg_friendships:
-                    DistributionOfFriendships.append(randomNum)
-        # Create friendships
+        # while len(DistributionOfFriendships)<len(self.users):
+        #     if DistributionOfFriendships!=True:
+        #         DistributionOfFriendships.append(random.randrange(0,5))
+        #     if len(DistributionOfFriendships)==len(self.users):
+        #         break
+        #     while sum(DistributionOfFriendships)/len(DistributionOfFriendships)!=avg_friendships:
+        #         randomNum=random.randrange(0,5)
+        #         if (sum(DistributionOfFriendships)+randomNum)/(len(DistributionOfFriendships)+1) == avg_friendships:
+        #             DistributionOfFriendships.append(randomNum)
+        # # Create friendships
 
-        print(DistributionOfFriendships)
-        for i in self.users:
-            count=len(self.friendships[i])
-            print("HELLLO",i,self.friendships[i])
-            # print("COUNT", count, self.friendships[i], len(self.friendships[i]),i)     
-            if DistributionOfFriendships[i-1]>0:                
-                if count <DistributionOfFriendships[i-1]:
-                    while count!=DistributionOfFriendships[i-1]:
-                        randomNum=random.randrange(1,numberOfUsers+1)
-                        print(DistributionOfFriendships,randomNum, i,len(self.friendships[randomNum]), DistributionOfFriendships[randomNum-1],self.friendships)
-                        if len(self.friendships[randomNum])<DistributionOfFriendships[randomNum-1] and randomNum!=i:
-                            # print("randomNum",randomNum ,"i",i,"friendships",self.friendships[i], "count", count,DistributionOfFriendships[i-1], self.friendships)
-                            if randomNum not in self.friendships[i]:
-                                count+=1
-                                # print("III",i,"Distribution",DistributionOfFriendships[i-1],"randomNum",randomNum,"count",count)
-                                self.add_friendship(i,randomNum)
-                                # print("after")
-  
-  
-                
-        print(random.randrange(numberOfUsers+1))
-        print(DistributionOfFriendships,DistributionOfFriendships[1])
+        # print(DistributionOfFriendships)
+        # for i in self.users:
+        #     # count=len(self.friendships[i])
+        #     # print("HELLLO",i,self.friendships[i])
+        #     # print("COUNT", count, self.friendships[i], len(self.friendships[i]),i)     
+        #     if DistributionOfFriendships[i-1]>0:                
+        #         if len(self.friendships[i]) <DistributionOfFriendships[i-1]:
+        #             while len(self.friendships[i])!=DistributionOfFriendships[i-1]:
+        #                 randomNum=random.randrange(1,numberOfUsers+1)
+        #                 print(DistributionOfFriendships,randomNum, i,len(self.friendships[randomNum]), DistributionOfFriendships[randomNum-1],self.friendships)
+        #                 if len(self.friendships[randomNum])<DistributionOfFriendships[randomNum-1] and randomNum!=i:
+        #                     # print("randomNum",randomNum ,"i",i,"friendships",self.friendships[i], "count", count,DistributionOfFriendships[i-1], self.friendships)
+        #                     if randomNum not in self.friendships[i]:
+        #                         # count+=1
+        #                         # print("III",i,"Distribution",DistributionOfFriendships[i-1],"randomNum",randomNum,"count",count)
+        #                         self.add_friendship(i,randomNum)
+        #                         # print("after")
+        for i in range(num_users):
+            self.add_user(i)
+
+        possible_friendships=[]
+        for user_id in self.users:
+            for friend_id in range(user_id+1, self.last_id+1):
+                possible_friendships.append((user_id, friend_id))
+
+        random.shuffle(possible_friendships)
+
+        for i in range(num_users*avg_friendships//2):
+            friendship= possible_friendships[i]
+            self.add_friendship(friendship[0],friendship[1])
+
 
     def get_all_social_paths(self, user_id):
         """
@@ -110,10 +119,8 @@ class SocialGraph:
                 graphs.add_edge(i,x)
 
         for i in graphs.vertices:
-            print(i)
             if graphs.bfs(i,user_id):
                 visited[i]=graphs.bfs(i,user_id)
-        print("Wow", visited)
         return visited
 
 
