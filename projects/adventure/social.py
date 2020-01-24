@@ -47,43 +47,7 @@ class SocialGraph:
         self.last_id = 0
         self.users = {}
         self.friendships = {}
-        # !!!! IMPLEMENT ME
-        # Add users
-        # numberOfUsers=num_users
-        # while num_users:
-        #     self.add_user(num_users)
-        #     num_users-=1
-        
-        # DistributionOfFriendships=[]
 
-        # while len(DistributionOfFriendships)<len(self.users):
-        #     if DistributionOfFriendships!=True:
-        #         DistributionOfFriendships.append(random.randrange(0,5))
-        #     if len(DistributionOfFriendships)==len(self.users):
-        #         break
-        #     while sum(DistributionOfFriendships)/len(DistributionOfFriendships)!=avg_friendships:
-        #         randomNum=random.randrange(0,5)
-        #         if (sum(DistributionOfFriendships)+randomNum)/(len(DistributionOfFriendships)+1) == avg_friendships:
-        #             DistributionOfFriendships.append(randomNum)
-        # # Create friendships
-
-        # print(DistributionOfFriendships)
-        # for i in self.users:
-        #     # count=len(self.friendships[i])
-        #     # print("HELLLO",i,self.friendships[i])
-        #     # print("COUNT", count, self.friendships[i], len(self.friendships[i]),i)     
-        #     if DistributionOfFriendships[i-1]>0:                
-        #         if len(self.friendships[i]) <DistributionOfFriendships[i-1]:
-        #             while len(self.friendships[i])!=DistributionOfFriendships[i-1]:
-        #                 randomNum=random.randrange(1,numberOfUsers+1)
-        #                 print(DistributionOfFriendships,randomNum, i,len(self.friendships[randomNum]), DistributionOfFriendships[randomNum-1],self.friendships)
-        #                 if len(self.friendships[randomNum])<DistributionOfFriendships[randomNum-1] and randomNum!=i:
-        #                     # print("randomNum",randomNum ,"i",i,"friendships",self.friendships[i], "count", count,DistributionOfFriendships[i-1], self.friendships)
-        #                     if randomNum not in self.friendships[i]:
-        #                         # count+=1
-        #                         # print("III",i,"Distribution",DistributionOfFriendships[i-1],"randomNum",randomNum,"count",count)
-        #                         self.add_friendship(i,randomNum)
-        #                         # print("after")
         for i in range(num_users):
             self.add_user(i)
 
@@ -109,18 +73,7 @@ class SocialGraph:
         The key is the friend's ID and the value is the path.
         """
         visited = {}  # Note that this is a dictionary, not a set
-        # !!!! IMPLEMENT ME
-        # graphs=Graph()
-        # for i in self.users:
-        #     graphs.add_vertex(i)
-        
-        # for i in self.users:
-        #     for x in self.friendships[i]:
-        #         graphs.add_edge(i,x)
 
-        # for i in graphs.vertices:
-        #     if graphs.bfs(i,user_id):
-        #         visited[i]=graphs.bfs(i,user_id)
         queue=Queue()
         queue.enqueue([user_id])
         while queue.size()>0:
