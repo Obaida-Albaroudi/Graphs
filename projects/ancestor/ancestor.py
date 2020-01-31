@@ -18,7 +18,7 @@ def earliest_ancestor(ancestors, starting_node):
                 if i < node:
                     longest=graph.bfs(i,starting_node)
                     node=i
-            if len(graph.bfs(i,starting_node)) > len(longest):
+            if len(graph.bfs(i,starting_node)) < len(longest):
                 longest=graph.bfs(i,starting_node)
                 node=i
         print("Wow", i,starting_node)
